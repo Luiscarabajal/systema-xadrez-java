@@ -5,6 +5,8 @@
  */
 package aplicacao;
 
+import boardgame.Position;
+
 /**
  *
  * @author Dell
@@ -15,7 +17,9 @@ public class programa {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        System.out.println("hola mulndo");
+        Position pos = new Position(3, 5);
+        
+        System.out.println(pos);
     }
     
 }
