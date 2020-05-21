@@ -5,7 +5,8 @@
  */
 package aplicacao;
 
-import boardgame.Position;
+import boardgame.Board;
+import javafx.scene.layout.Border;
 
 /**
  *
@@ -17,9 +18,9 @@ public class programa {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Position pos = new Position(3, 5);
+        Board board = new Board(8, 8);
         
-        System.out.println(pos);
+        
     }
     
 }
