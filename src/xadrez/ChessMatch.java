@@ -6,6 +6,9 @@
 package xadrez;
 
 import boardgame.Board;
+import boardgame.Position;
+import xadrez.pieces.King;
+import xadrez.pieces.Rook;
 
 /**
  *
@@ -18,6 +21,7 @@ public class ChessMatch {
     public ChessMatch() {
 
         board = new Board(8, 8);
+        inicialSetup();
     }
     
     public ChessPiece[][] getPieces(){
@@ -32,5 +36,10 @@ public class ChessMatch {
             }
         }
         return mat;
+    }
+    private void inicialSetup(){
+        board.placePiece(new Rook(Color.WHITE, board), new Position(2, 1));
+        board.placePiece(new King(Color.BLACK, board), new Position(0, 4));
+        board.placePiece(new King(Color.WHITE, board), new Position(7, 4));
     }
 }
