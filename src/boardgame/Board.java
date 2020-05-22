@@ -10,42 +10,65 @@ package boardgame;
  * @author Dell
  */
 public class Board {
+
     private int rows;
-    private int colmn;
+    private int columns;
     private Piece[][] pieces;
 
-    public Board(int rows, int colmn) {
+    public Board(int rows, int columns) {
+        if (rows < 1 || columns < 1) {
+            throw new BoardException("Erro ao criar tabuleiro: é necessário ter pelo menos uma linha e uma coluna no minimo");
+        }
+
         this.rows = rows;
-        this.colmn = colmn;
-        pieces = new Piece[rows][colmn];
+        this.columns = columns;
+        pieces = new Piece[rows][columns];
     }
 
     public int getRows() {
         return rows;
     }
 
-    public void setRows(int rows) {
-        this.rows = rows;
+    public int getColumns() {
+        return columns;
     }
 
-    public int getColmn() {
-        return colmn;
+    public Piece piece(int row, int column) {
+        if (!positionExists(row, column)) {
+            throw new BoardException(" Posição não esta na borda");
+        }
+        return pieces[row][column];
     }
 
-    public void setColmn(int colmn) {
-        this.colmn = colmn;
-    }
-    
-    public Piece piece(int row, int colmn){
-        return pieces[row][colmn];
-    }
-    public Piece piece(Position position){
-    
+    public Piece piece(Position position) {
+        if (!positionExists(position)) {
+            throw new BoardException(" Posição não esta na borda");
+        }
         return pieces[position.getRow()][position.getColum()];
     }
+
     public void placePiece(Piece piece, Position position) {
+        if (thereIsAPiece(position)) {
+            throw new BoardException("There is already a piece on posição " + position);
+        }
         pieces[position.getRow()][position.getColum()] = piece;
         piece.position = position;
-        
+
+    }
+
+    private boolean positionExists(int row, int column) {
+
+        return row >= 0 && row < rows && column >= 0 && column < columns;
+    }
+
+    public boolean positionExists(Position position) {
+        return positionExists(position.getRow(), position.getColum());
+    }
+
+    public boolean thereIsAPiece(Position position) {
+        if (!positionExists(position)) {
+            throw new BoardException(" Posição não esta na borda");
+        }
+        return piece(position) != null;
     }
 }
